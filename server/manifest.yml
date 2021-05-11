@@ -1,11 +1,11 @@
-  applications:
-  - name: dealerreiew
+applications:
+  - name: best-car-django-app
     routes:
-      - route: host.domain
+      - route: jjnikk-best-car.eu-gb.mybluemix.net
     memory: 128M
     buildpack: python_buildpack
-  - name: dealerreiew-nginx
+  - name: best-car-django-app-nginx
     routes:
-      - route: host.domain/static
+      - route: jjnikk-best-car.eu-gb.mybluemix.net/static
     memory: 128M
     buildpack: staticfile_buildpack
