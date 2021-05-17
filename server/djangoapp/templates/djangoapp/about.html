@@ -16,20 +16,12 @@
     <body>
         <div class="container">
              <!--Add a nav bar here -->
-            <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Home</a>
-                        <a class="navbar-brand" href="{% url 'djangoapp:about' %}">About</a>
-                        <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">Contact Us</a>
-                    </div>
-                </div>
-            </nav>
+            {% include 'djangoapp/navbar.html' %}
             <!--Add a dealer table here -->
 
         
             <div class="row p-3">
-                <div class="col">
+                <div class="col-4">
                     <p>Welcome to Best Cars dealership, home to the best cars in North America. We sell domestic and imported cars at reasonable prices.</p>
                 </div>
             </div>

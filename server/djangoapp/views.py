@@ -31,16 +31,51 @@ def contact(request):
         return render(request, 'djangoapp/contact.html', context)
 
 # Create a `login_request` view to handle sign in request
-# def login_request(request):
-# ...
+def login_request(request):
+    context = {}
+    # print('login attempt')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['psw']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            
+    return redirect('djangoapp:index')
 
 # Create a `logout_request` view to handle sign out request
-# def logout_request(request):
-# ...
+def logout_request(request):
+    # print('logout')
+    logout(request)
+    return redirect('djangoapp:index')
 
 # Create a `registration_request` view to handle sign up request
-# def registration_request(request):
-# ...
+def registration_request(request):
+    context = {}
+    if request.method == 'GET':
+        return render(request, 'djangoapp/registration.html', context=context)
+
+    elif request.method == 'POST':
+        user_exist = False
+        # print(request.POST)
+        username = request.POST['username']
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        password = request.POST['password']
+        # print(username)
+        try:
+            User.objects.get(username=username)
+            user_exist = True
+        except:
+            # If not, simply log this is a new user
+            logger.debug("{} is new user".format(username))
+        
+        if not user_exist:
+            user = User.objects.create_user(username=username, first_name=firstname, last_name=lastname, password=password)
+            return redirect('djangoapp:index')
+        else:
+            return render(request, 'djangoapp/registration.html', context=context)
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
